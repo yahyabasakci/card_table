@@ -1,55 +1,135 @@
-<h2> home page </h2>
+<%= link_to '+ Add a card', new_user_card_path(current_user), class: 'btn-add-card' %>
+
+<h1 align="center">INTERN PROJECT</h1>
+
+<style>
+  .btn-add-card {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-decoration: none;
+    background-color: #73c484; /* Yeşil renk */
+    color: black;
+    border: none;
+    border-radius: 25px; /* Yuvarlak köşeler */
+    padding: 10px 20px; /* İç boşluk */
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1000; /* Diğer elementlerin üstünde olması için */
+  }
+  .container {
+    width: 100%;
+  }
+
+  .rectangle-1 {
+    position: relative;
+    height: 250px;
+    background-color: #f0f0f0; /* Gri arka plan rengi */
+    border-bottom: 1px solid #ccc; /* Alt çizgi */
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    overflow-x: auto;
+  }
+
+  .column-1 {
+    width: 250px;
+    height: 200px;
+    background-color: #99CCFF; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
+    border: 1px solid #ccc; /* Kenar rengi */
+  }
+
+  .column-2 {
+    width: 100px;
+    height: 230px;
+    background-color: #363f3a; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
+    border: 1px solid #ccc; /* Kenar rengi */
+    margin-left: auto; /* Sol tarafta yer kaplamasını sağlar */
+  }
+
+  .rectangle-2 {
+    width: auto;
+    height: 600px;
+    background-color: #f0f0f0; /* Gri arka plan rengi */
+    border: 1px solid #ccc; /* Kenar rengi */
+    position: relative;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Sol tarafa hizalama */
+    padding: 10px; /* İç boşluk */
+  }
+
+  .column-3 {
+    width: 100px;
+    height: 580px;
+    background-color: #1f582e; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
+    border: 1px solid #ccc; /* Kenar rengi */
+    position: absolute;
+    top: 5px; /* Üstten boşluk */
+    right: 0; /* Sağ tarafta yer alır */
+  }
+
+  .dynamic-column {
+    width: 350px;
+    height: 120px; /* Kart boyutu */
+    border: 1px solid #ccc; /* Kenar rengi */
+    margin: 5px; /* Kartlar arasında boşluk */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Yazı rengi */
+    border-radius: 5px; /* Köşe yuvarlama */
+  }
+
+   .btn-add-column {
+    position: absolute;
+    top: 30px;
+    right: 120px;
+    width: 30px;
+    height: 30px;
+    background-color: #34AADC; /* Turkuaz renk */
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+  }
 
 
-  <style>
-    .container {
-      width: 100%;
+
+  .card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+    height: 110px;
+    width: 150px;
+    background-color: #203038;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    flex: 1 0 auto;
+  }
+  .card-info {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+  }
+
+  .rotate-text {
+      display: inline-block; /* Döndürme işlemi için inline-block kullanımı */
+      transform: rotate(90deg); /* 90 derece döndürme */
+      transform-origin: left bottom; /* Döndürme noktasını ayarlama */
+      white-space: nowrap; /* Metnin satır sonuna geçmesini önler */
+      color: white;
+      font-size:20px;
     }
 
-    .rectangle-1 {
-      position: relative;
-      height: 25px;
-      background-color: #f0f0f0; /* Gri arka plan rengi */
-      border-bottom: 1px solid #ccc; /* Alt çizgi */
-      display: flex;
-      align-items: center;
-      padding: 0 5px;
-    }
-
-    .column-1 {
-      width: 15px;
-      height: 15px;
-      background-color: #ff0000; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
-      border: 1px solid #ccc; /* Kenar rengi */
-    }
-
-    .column-2 {
-      width: 10px;
-      height: 23px;
-      background-color: #00ff00; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
-      border: 1px solid #ccc; /* Kenar rengi */
-      margin-left: auto; /* Sol tarafta yer kaplamasını sağlar */
-    }
-
-    .rectangle-2 {
-      width: 200px;
-      height: 300px;
-      background-color: #f0f0f0; /* Gri arka plan rengi */
-      border: 1px solid #ccc; /* Kenar rengi */
-      position: relative;
-      margin-top: 10px;
-    }
-
-    .column-3 {
-      width: 10px;
-      height: 195px;
-      background-color: #0000ff; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
-      border: 1px solid #ccc; /* Kenar rengi */
-      position: absolute;
-      top: 5px; /* Üstten boşluk */
-      right: 0; /* Sağ tarafta yer alır */
-    }
-  </style>
+</style>
 
 <body>
   <div class="container">
@@ -57,22 +137,51 @@
     <div class="rectangle-1">
       <div class="column-1">
         <!-- ID 1 olan column'un içeriği buraya gelir -->
-        <%= @columns.find { |c| c.id == 1 }&.title %>
+        <%= @static_columns.find { |c| c.id == 1 }&.title %>
+        (<%= @column_card_counts[1] %>)
+        <!--------------------------------------------------------------->
+         <div style="display: flex; flex-wrap: nowrap; align-items: flex-start;">
+        <% @cards.each do |card| %>
+          <div class="card">
+            <h3><%= card.title %></h3>
+            <p><%= card.description %></p>
+            <!----------------->
+            <p class="card-info">
+        By <%= card.user.name %> <%= card.user.lastname[0].capitalize %>. <%= time_ago_in_words(card.created_at) %> ago
+      </p>
+          </div>
+        <% end %>
+      </div>
       </div>
       <div class="column-2">
         <!-- ID 2 olan column'un içeriği buraya gelir -->
-        <%= @columns.find { |c| c.id == 2 }&.title %>
+         (<%= @column_card_counts[2] %>)
+        <div class="rotate-text">
+        <%= @static_columns.find { |c| c.id == 2 }&.title&.upcase %>
+        </div>
       </div>
     </div>
 
     <!-- 2. Dikdörtgen -->
     <div class="rectangle-2">
+      <%# <%= link_to 'Add New Column', new_column_path, class: 'btn-primary' %> 
+      <button class="btn-add-column" onclick="window.location.href='<%= new_column_path %>'">+</button>
       <div class="column-3">
         <!-- ID 3 olan column'un içeriği buraya gelir -->
-        <%= @columns.find { |c| c.id == 3 }&.title %>
+        (<%= @column_card_counts[3] %>)
+        <div class="rotate-text">
+        <%= @static_columns.find { |c| c.id == 3 }&.title&.upcase %>
+        </div>
+      </div>
+
+      <!-- Dinamik Columns -->
+      <div style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
+      <% @dynamic_columns.each do |column| %>
+        <div class="dynamic-column" style="background-color: <%= column.color_code %>;">
+          <h4><%= column.title %> (<%= @column_card_counts[column.id] %>) </h4>
+        </div>
+      <% end %>
       </div>
     </div>
   </div>
 </body>
-
-

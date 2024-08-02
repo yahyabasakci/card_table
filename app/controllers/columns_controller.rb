@@ -9,26 +9,43 @@ class ColumnsController < ApplicationController
     @new_column = Column.new
   end
 
-  private
 
-  def set_column
-    @column = column.find(params[:id])
+  
+
+  def new
+    @column = Column.new
   end
 
+  # def create
+  #   @user = User.find(params[:user_id])
+  #   @column = @user.columns.build(column_params)
+  #   if @column.save
+  #     redirect_to user_path(@user), notice: 'Kolon başarıyla eklendi.'
+  #   else
+  #     redirect_to user_path(@user), alert: 'Kolon eklenirken bir hata oluştu.'
+  #   end
+  # end
   def create
-    @user = User.find(params[:user_id])
-    @column = @user.columns.build(column_params)
+    @column = Column.new(column_params)
+    @column.is_static=false
     if @column.save
-      redirect_to user_path(@user), notice: 'Kolon başarıyla eklendi.'
+      redirect_to root_path, notice: 'Column was successfully created.'
     else
-      redirect_to user_path(@user), alert: 'Kolon eklenirken bir hata oluştu.'
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
+  # def column_params
+  #   params.require(:column).permit(:name)
+  # end
   def column_params
-    params.require(:column).permit(:name)
+    params.require(:column).permit(:title, :description, :color_code)
+  end
+
+  def set_column
+    @column = column.find(params[:id])
   end
   
 end
