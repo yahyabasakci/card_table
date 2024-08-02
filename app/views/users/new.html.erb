@@ -1,0 +1,92 @@
+<%= form_with(model: @user, local: true, html: { class: 'user-form' }) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="error-messages">
+      <h2><%= pluralize(@user.errors.count, "error") %> prevented this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastname, class: 'form-label' %>
+    <%= form.text_field :lastname, class: 'form-input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, class: 'form-label' %>
+    <%= form.email_field :email, class: 'form-input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, class: 'form-label' %>
+    <%= form.password_field :password, class: 'form-input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation, class: 'form-label' %>
+    <%= form.password_field :password_confirmation, class: 'form-input' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Sign Up', class: 'btn-submit' %>
+  </div>
+<% end %>
+
+<style>
+  .user-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+
+  .error-messages {
+    margin-bottom: 20px;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f2dede;
+  }
+
+  .form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .btn-submit:hover {
+    background-color: #4cae4c;
+  }
+</style>

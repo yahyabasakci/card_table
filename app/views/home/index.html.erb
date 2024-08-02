@@ -1,0 +1,78 @@
+<h2> home page </h2>
+
+
+  <style>
+    .container {
+      width: 100%;
+    }
+
+    .rectangle-1 {
+      position: relative;
+      height: 25px;
+      background-color: #f0f0f0; /* Gri arka plan rengi */
+      border-bottom: 1px solid #ccc; /* Alt çizgi */
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+    }
+
+    .column-1 {
+      width: 15px;
+      height: 15px;
+      background-color: #ff0000; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
+      border: 1px solid #ccc; /* Kenar rengi */
+    }
+
+    .column-2 {
+      width: 10px;
+      height: 23px;
+      background-color: #00ff00; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
+      border: 1px solid #ccc; /* Kenar rengi */
+      margin-left: auto; /* Sol tarafta yer kaplamasını sağlar */
+    }
+
+    .rectangle-2 {
+      width: 200px;
+      height: 300px;
+      background-color: #f0f0f0; /* Gri arka plan rengi */
+      border: 1px solid #ccc; /* Kenar rengi */
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .column-3 {
+      width: 10px;
+      height: 195px;
+      background-color: #0000ff; /* Color_code yerine buraya kullanmak istediğiniz rengi ekleyin */
+      border: 1px solid #ccc; /* Kenar rengi */
+      position: absolute;
+      top: 5px; /* Üstten boşluk */
+      right: 0; /* Sağ tarafta yer alır */
+    }
+  </style>
+
+<body>
+  <div class="container">
+    <!-- 1. Dikdörtgen -->
+    <div class="rectangle-1">
+      <div class="column-1">
+        <!-- ID 1 olan column'un içeriği buraya gelir -->
+        <%= @columns.find { |c| c.id == 1 }&.title %>
+      </div>
+      <div class="column-2">
+        <!-- ID 2 olan column'un içeriği buraya gelir -->
+        <%= @columns.find { |c| c.id == 2 }&.title %>
+      </div>
+    </div>
+
+    <!-- 2. Dikdörtgen -->
+    <div class="rectangle-2">
+      <div class="column-3">
+        <!-- ID 3 olan column'un içeriği buraya gelir -->
+        <%= @columns.find { |c| c.id == 3 }&.title %>
+      </div>
+    </div>
+  </div>
+</body>
+
+
