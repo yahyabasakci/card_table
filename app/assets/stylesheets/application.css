@@ -24,7 +24,7 @@
 
 /* app/assets/stylesheets/modal.css */
 /* app/assets/stylesheets/modal.css */
-#cardModal {
+  #cardModal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,3 +56,29 @@
     cursor: pointer;
   }
    */
+
+
+  #columnModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+  #columnModal.hidden {
+    display: none;
+  }
+
+  #columnModal .modal-content {
+    padding: 20px;
+    border-radius: 8px;
+    width: 700px;
+    height: auto; /* Adjust height as needed */
+    position: relative;
+  }

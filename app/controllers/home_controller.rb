@@ -11,5 +11,6 @@ class HomeController < ApplicationController
      @column_card_counts = (@static_columns + @dynamic_columns).each_with_object({}) do |column, counts|
       counts[column.id] = @cards.where(column_id: column.id).count
     end
+    @column = Column.new
   end
 end

@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const openModalButton = document.querySelector('#openModalButton');
     const modal = document.querySelector('#cardModal');
     const closeModalButton = document.querySelector('#closeModal');
+
+
+    const openColumnModalButton = document.querySelector('#openColumnModalButton');
+    const columnModal = document.querySelector('#columnModal');
+    const closeColumnModalButton = document.querySelector('#closeColumnModal');
+
+
+
   
     openModalButton.addEventListener('click', (event) => {
       event.preventDefault(); // Linkin varsayılan işlevini engelle
@@ -28,6 +36,28 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.add('hidden');
       }
     });
+
+
+
+    openColumnModalButton.addEventListener('click', (event) => {
+      event.preventDefault(); // Linkin varsayılan işlevini engelle
+      columnModal.classList.remove('hidden');
+  });
+
+  closeColumnModalButton.addEventListener('click', () => {
+      columnModal.classList.add('hidden');
+  });
+
+  window.addEventListener('click', (event) => {
+      if (event.target === columnModal) {
+          columnModal.classList.add('hidden');
+      }
+  });
+
+
+
+
+
 
   });
   
