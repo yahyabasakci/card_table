@@ -63,3 +63,5 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
   
+import "trix"
+import "@rails/actiontext"
