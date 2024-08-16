@@ -29,7 +29,7 @@ class ColumnsController < ApplicationController
     @column = Column.new(column_params)
     @column.is_static=false
     if @column.save
-      redirect_to root_path, notice: 'Column was successfully created.'
+      redirect_to home_path, notice: 'Column was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end

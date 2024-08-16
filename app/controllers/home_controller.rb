@@ -3,6 +3,10 @@ class HomeController < ApplicationController
     # @columns = Column.where(is_static: true)
      @static_columns = Column.where(is_static: true)
      @dynamic_columns = Column.where(is_static: false)
+     @column_title_1 = @static_columns.find {|c| c.id ==1 }&.title
+     @column_title_2 = @static_columns.find {|c| c.id ==2 }&.title
+     @column_title_3 = @static_columns.find {|c| c.id ==3 }&.title
+
      @cards=Card.all
      ############
      @card=Card.new

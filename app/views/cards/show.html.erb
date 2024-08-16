@@ -1,0 +1,39 @@
+<div class="flex justify-center items-center min-h-screen w-full bg-gray-900">
+  <div class="w-full h-full p-12 bg-gray-800 text-stone-50 shadow-xl rounded-lg">
+    <!-- Card Title and Icon -->
+    <div class="flex items-center mb-4">
+      <svg class="h-8 w-8 text-stone-50 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Icon için SVG kodu (örnek olarak bir check iconu) -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      <h1 class="text-3xl font-bold hover:underline"><%= @card.title %></h1>
+    </div>
+
+    <!-- Horizontal Line -->
+    <hr class="mb-6 border-t-2 border-stone-50 m-11">
+
+    <!-- Card Details -->
+    <div class="space-y-10">
+
+      <!-- Column with Select Box -->
+    <div class="flex items-center space-x-4">
+      <p class="font-bold">Column:</p>
+      <p class="mr-4"><%= @card.column.title %></p>
+      <select class="p-2 rounded-md bg-gray-700 text-stone-50" name="column_id" id="column_id">
+        <% @columns.each do |column| %>
+          <option value="<%= column.id %>" <%= 'selected' if column.id == @card.column_id %>><%= column.title %></option>
+        <% end %>
+      </select>
+    </div>
+
+      <p><strong>Assigned to</strong> <!-- Assigned user bilgisi buraya gelecek --></p>
+      <p><strong>Due on</strong> <!-- Due date bilgisi buraya gelecek --></p>
+      <p><strong>Notes</strong> <%= @card.description %></p>
+      <p><strong>Steps</strong> <!-- Steps bilgisi buraya gelecek --></p>
+      <p><strong>Added by</strong> <%= @card.user.name %> <%= @card.user.lastname[0].capitalize %>. on <%= @card.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+
+    <hr class="mb-6 border-t-2 border-stone-50 m-11">
+  </div>
+</div>
+  

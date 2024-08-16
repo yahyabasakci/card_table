@@ -80,12 +80,14 @@
     <div class="relative h-[250px] bg-gray-800 border-b border-gray-300 flex items-center px-1.5 overflow-x-auto">
       <div class="w-full h-[200px] bg-gray-800 border border-gray-300 text-white">
         <!-- ID 1 olan column'un içeriği buraya gelir -->
-        <%= @static_columns.find { |c| c.id == 1 }&.title %>
+        
+          <%=@column_title_1%>
         (<%= @column_card_counts[1] %>)
         <!--------------------------------------------------------------->
          <%# <div style="display: flex; flex-wrap: nowrap; align-items: flex-start;">  %>
         <div class="flex-nowrap flex gap-2 items-start">
           <% @cards.each do |card| %>
+            <%= link_to user_card_path(card.user, card), class: "block" do %>
             <div class="border border-gray-300 p-2.5 m-1.25 bg-gray-800 rounded-sm shadow-md flex-auto">
               <h3><%= card.title %></h3>
               <p><%= card.description %></p>
@@ -95,13 +97,14 @@
               </p>
             </div>
           <% end %>
+          <% end %>
         </div>
       </div>
       <div class="w-[100px] h-[230px] bg-gray-600 border border-gray-300 ml-auto text-white">
         <!-- ID 2 olan column'un içeriği buraya gelir -->
          (<%= @column_card_counts[2] %>)
         <div class="inline-block rotate-90 origin-bottom-left whitespace-nowrap text-white text-xl">
-        <%= @static_columns.find { |c| c.id == 2 }&.title&.upcase %>
+        <%=@column_title_2.upcase%>
         </div>
       </div>
     </div>
@@ -120,16 +123,19 @@
         <!-- ID 3 olan column'un içeriği buraya gelir -->
         (<%= @column_card_counts[3] %>)
         <div class="inline-block rotate-90 origin-bottom-left whitespace-nowrap text-white text-xl">
-        <%= @static_columns.find { |c| c.id == 3 }&.title&.upcase %>
+        <%=@column_title_3.upcase%>
         </div>
       </div>
 
       <!-- Dinamik Columns -->
-      <div style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
+      <div class="flex flex-nowrap overflow-x-auto w-full mt-2">
       <% @dynamic_columns.each do |column| %>
         <div class="w-80 h-32 border border-gray-300 m-1.5 flex justify-center text-white rounded-sm" style="background-color: <%= column.color_code %>;">
           <div class="flex flex-col">
           <h4 class="text-white font-bold mb-1 mt-2.5"><%= column.title %> (<%= @column_card_counts[column.id] %>) </h4>
+
+          
+            
           </div>      
         </div>
       <% end %>

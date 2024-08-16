@@ -6,7 +6,9 @@ class CardsController < ApplicationController
   end
 
   def show
+    
     @card = Card.find(params[:id])
+    @columns = Column.all
   end
   def new 
     @card = Card.new
@@ -17,7 +19,7 @@ class CardsController < ApplicationController
     @card.user = current_user
     @card.column_id = 1  
     if @card.save
-      redirect_to new_user_card_path, notice: 'Card was successfully created.'
+      redirect_to home_path, notice: 'Card was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
