@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show] do
     resources :cards
+    
     resources :user_assigns
   end
   resources :columns
