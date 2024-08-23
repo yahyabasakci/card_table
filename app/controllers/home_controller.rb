@@ -8,6 +8,8 @@ class HomeController < ApplicationController
      @column_title_3 = @static_columns.find {|c| c.id ==3 }&.title
 
      @cards=Card.all
+     @columns=Column.all
+     @column=Column.new
      ############
      @card=Card.new
      @user=current_user
@@ -15,6 +17,6 @@ class HomeController < ApplicationController
      @column_card_counts = (@static_columns + @dynamic_columns).each_with_object({}) do |column, counts|
       counts[column.id] = @cards.where(column_id: column.id).count
     end
-    @column = Column.new
+
   end
 end

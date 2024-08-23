@@ -4,9 +4,9 @@ class ColumnsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @columns = Column.find(params[:id])
-    @new_column = Column.new
+    @column = Column.find(params[:id])
+    @card = Card.new
+    @cards = Card.where(column_id: @column.id)
   end
 
 
@@ -35,6 +35,15 @@ class ColumnsController < ApplicationController
     end
   end
 
+
+  def destroy
+    @column = Column.find(params[:id])
+    @column.destroy
+    respond_to do |format|
+      format.html { redirect_to home_path, notice: 'Column was successfully destroyed.' }
+    end
+  end
+
   private
 
   # def column_params
@@ -44,8 +53,8 @@ class ColumnsController < ApplicationController
     params.require(:column).permit(:title, :description, :color_code)
   end
 
-  def set_column
-    @column = column.find(params[:id])
-  end
+  # def set_column
+  #   @column = column.find(params[:id])
+  # end
   
 end

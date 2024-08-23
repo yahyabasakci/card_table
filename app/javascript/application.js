@@ -10,6 +10,39 @@ import "controllers"
 // JavaScript for modal functionality
 // app/assets/javascripts/modal.js
 document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('[id^="dropdownButton-"]').forEach(button => {
+    button.addEventListener('click', () => {
+      const columnId = button.id.split('-')[1];
+      const menu = document.getElementById(`dropdownMenu-${columnId}`);
+      const isVisible = !menu.classList.contains('hidden');
+
+      // Tüm dropdown menülerini gizle
+      document.querySelectorAll('[id^="dropdownMenu-"]').forEach(menu => {
+        menu.classList.add('hidden');
+      });
+
+      // Seçilen menüyü göster/gizle
+      menu.classList.toggle('hidden', isVisible);
+    });
+  });
+
+  // Menü dışına tıklanırsa menüyü gizle
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('[id^="dropdownButton-"]')) {
+      document.querySelectorAll('[id^="dropdownMenu-"]').forEach(menu => {
+        menu.classList.add('hidden');
+      });
+    }
+  });
+
+
+
+
+
+
+
+
     const openModalButton = document.querySelector('#openModalButton');
     const modal = document.querySelector('#cardModal');
     const closeModalButton = document.querySelector('#closeModal');
@@ -53,6 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
           columnModal.classList.add('hidden');
       }
   });
+
+
 
 
 

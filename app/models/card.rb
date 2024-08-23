@@ -3,7 +3,7 @@ class Card < ApplicationRecord
   belongs_to :user
   belongs_to :column
   
-  validates :title, presence: true
+  validates :title, presence: true, length: {maximum: 20 }
   validates :description, presence: true
 
 end

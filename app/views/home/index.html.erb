@@ -8,12 +8,14 @@
   <div class="flex flex-col mb-4 bg-slate-800 p-6 rounded-lg shadow-lg relative modal-content text-stone-50 text-xl">
     <p>Add a new card to Triage</p>
     <br>
-      <%= render 'home/new_card_form' %>  
+      <%= render 'cards/form' %>
+
+ 
   </div>
 </div>
 
 <!-- Buton -->
-<%= link_to '+ Add a card', '#', id: 'openModalButton', class: 'absolute top-11 left-50 bg-green-600 text-black border-none rounded-full py-2 px-3 text-lg cursor-pointer text-center z-50' %>
+<%= link_to '+ Add a card', '#', id: 'openModalButton', class: 'absolute top-11 left-50 bg-green-600 text-black border-none rounded-full py-2 px-3 text-lg cursor-pointer text-center z-50', data: { column_id: 1, toggle: 'modal' } %>
 
 
 
@@ -22,8 +24,9 @@
     <div class="relative h-[250px] bg-gray-800 border-b border-gray-300 flex items-center px-1.5 overflow-x-auto">
       <div class="w-full h-[200px] bg-gray-800 border border-gray-300 text-white">
         <!-- ID 1 olan column'un içeriği buraya gelir -->
-        
+            <%= link_to column_path(1), class: "text-white" do %>
           <%=@column_title_1%>
+          <% end %>
         (<%= @column_card_counts[1] %>)
         <!--------------------------------------------------------------->
          <%# <div style="display: flex; flex-wrap: nowrap; align-items: flex-start;">  %>
@@ -31,6 +34,7 @@
           <% @cards.each do |card| %>
             <%= link_to user_card_path(card.user, card), class: "block" do %>
             <div class="border border-gray-300 p-2.5 m-1.25 bg-gray-800 rounded-sm shadow-md flex-auto">
+              
               <h3><%= card.title %></h3>
               <p><%= card.description %></p>
               <!----------------->
@@ -46,13 +50,17 @@
         <!-- ID 2 olan column'un içeriği buraya gelir -->
          (<%= @column_card_counts[2] %>)
         <div class="inline-block rotate-90 origin-bottom-left whitespace-nowrap text-white text-xl">
+          <%= link_to column_path(2), class: "text-white" do %>
         <%=@column_title_2.upcase%>
+        <% end %>
         </div>
       </div>
     </div>
 
     <!-- 2. Dikdörtgen -->
     <div class="w-auto h-[600px] bg-gray-800 border border-gray-300 relative mt-px flex flex-col items-start p-2.5">
+
+      
       <%# <%= link_to 'Add New Column', new_column_path, class: 'btn-primary' %> 
       <!------------------------ modal buton ------->
 
@@ -65,17 +73,48 @@
         <!-- ID 3 olan column'un içeriği buraya gelir -->
         (<%= @column_card_counts[3] %>)
         <div class="inline-block rotate-90 origin-bottom-left whitespace-nowrap text-white text-xl">
+          <%= link_to column_path(3), class: "text-white" do %>
         <%=@column_title_3.upcase%>
+         <% end %>
         </div>
       </div>
 
       <!-- Dinamik Columns -->
       <div class="flex flex-nowrap overflow-x-auto w-[1330px] mt-2 ">
       <% @dynamic_columns.each do |column| %>
-        <div class="w-80 h-32 border border-gray-300 m-1.5 flex justify-center text-white rounded-sm " style="background-color: <%= column.color_code %>;">
-          <div class="flex flex-col">
-          <h4 class="text-white font-bold mb-1 mt-2.5"><%= column.title %> (<%= @column_card_counts[column.id] %>) </h4>
 
+      
+        
+        
+        <div class="w-80 h-32 border border-gray-300 m-1.5 flex justify-center text-white rounded-lg relative" style="background-color: <%= column.color_code %> ;">
+            
+          <!--- bas -->
+             <div class="absolute top-1 right-1">
+    <button id="dropdownButton-<%= column.id %>" class="w-6 h-6 flex items-center justify-center border border-1 rounded-full text-white">...</button>
+    <!-- Dropdown Menu -->
+    <div id="dropdownMenu-<%= column.id %>" class="hidden absolute right-0 top-full mt-2 bg-gray-700 text-white rounded-lg shadow-lg w-48">
+      <ul>
+        <li><a href="#" class="block px-1 py-0.5 hover:bg-gray-700">Option 1</a></li>
+        <li><%= link_to 'Add card', '#', id: 'openModalButton', class: 'block px-4 py-2 hover:bg-gray-700 w-full text-left', data: { column_id: column.id, toggle: 'modal' } %>
+</li>
+        <%= form_with url: column_path(column), method: :delete, local: true do %>
+                <button type="submit" class="block px-4 py-2 hover:bg-gray-700 w-full text-left">Put in the trash</button>
+              <% end %>
+      </ul>
+    </div>
+  </div>
+
+
+            <!----bit-->
+          <div class="flex flex-col">
+          <h4 class="text-white font-bold mb-1 mt-2.5 flex justify-center">
+            <%= link_to column_path(column), class: "text-white" do %>
+            <%= column.title %> 
+            <% end %> 
+            (<%= @column_card_counts[column.id] %>) </h4>
+            <div class="w-[180px] h-[80px] border-dashed border-gray-900 border-2 flex rounded-lg" >
+
+            </div>
           
             
           </div>      
@@ -90,7 +129,7 @@
   <div class="flex flex-col bg-slate-800 p-6 rounded-lg shadow-lg relative modal-content text-stone-50 text-xl">
     <p class="text-lg font-bold">Add a new column</p>
     <br>
-        <%= render 'home/new_column_form' %>
+         <%= render 'columns/form' %>
   </div>
 </div>
   
