@@ -20,14 +20,13 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
 
-
+  resources :columns do 
+    resources :cards
+  end
 
   resources :users, only: [:new, :create, :show] do
-    resources :cards
-    
     resources :user_assigns
   end
-  resources :columns
   
   # Defines the root path route ("/")
   # root "posts#index"

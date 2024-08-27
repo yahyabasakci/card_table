@@ -11,6 +11,44 @@ import "controllers"
 // app/assets/javascripts/modal.js
 document.addEventListener('DOMContentLoaded', () => {
 
+ // Column Dropdown
+ const columnButton = document.getElementById('columnDropdownButton');
+ const columnMenu = document.getElementById('columnDropdownMenu');
+
+ if (columnButton && columnMenu) {
+   columnButton.addEventListener('click', () => {
+     columnMenu.classList.toggle('hidden');
+   });
+
+   document.addEventListener('click', (event) => {
+     if (!columnButton.contains(event.target) && !columnMenu.contains(event.target)) {
+       columnMenu.classList.add('hidden');
+     }
+   });
+ }
+
+ // Card Dropdown
+ const cardButton = document.getElementById('cardDropdownButton');
+ const cardMenu = document.getElementById('cardDropdownMenu');
+
+ if (cardButton && cardMenu) {
+   cardButton.addEventListener('click', () => {
+     cardMenu.classList.toggle('hidden');
+   });
+
+   document.addEventListener('click', (event) => {
+     if (!cardButton.contains(event.target) && !cardMenu.contains(event.target)) {
+       cardMenu.classList.add('hidden');
+     }
+   });
+ }
+
+
+
+
+
+
+
   document.querySelectorAll('[id^="dropdownButton-"]').forEach(button => {
     button.addEventListener('click', () => {
       const columnId = button.id.split('-')[1];
@@ -94,6 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
   
+  
+
+
+
+
+
+
+
+
+
+
   
   
 import "trix"

@@ -1,20 +1,5 @@
-<%= form_with model: @column, local: true do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :color_code, 'Choose Color' %>
-    <%= form.select :color_code, options_for_select([['Red', '#9E2B3A'], ['Green', '#088331'], ['Blue', '#3799BD'], ['Yellow', '#D0A945'], ['Purple', '#A66DB8']]) %>
-  </div>
-
-  <div>
-    <%= form.submit 'Create Column' %>
-  </div>
+<%= turbo_frame_tag turbo_frame_request_id do %>
+  <%= render "form" %>
 <% end %>
+
+

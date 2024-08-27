@@ -3,14 +3,17 @@
     INTERN PROJECT
   </h1>
 
+
+  <% if session[:user_id] %>
+  <%= button_to 'Logout', logout_path, method: :delete, class: ' absolute top-10 right-10 bg-red-500 text-white px-4 py-2 rounded-full' %>
+<% end %>
+
 <!-- Modal HTML -->
 <div id="cardModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
   <div class="flex flex-col mb-4 bg-slate-800 p-6 rounded-lg shadow-lg relative modal-content text-stone-50 text-xl">
     <p>Add a new card to Triage</p>
     <br>
-      <%= render 'cards/form' %>
-
- 
+      <%= turbo_frame_tag "add-new-card", src: new_column_card_path(@column.id) %>
   </div>
 </div>
 
@@ -31,9 +34,9 @@
         <!--------------------------------------------------------------->
          <%# <div style="display: flex; flex-wrap: nowrap; align-items: flex-start;">  %>
         <div class="flex-nowrap flex gap-2 items-start">
-          <% @cards.each do |card| %>
-            <%= link_to user_card_path(card.user, card), class: "block" do %>
-            <div class="border border-gray-300 p-2.5 m-1.25 bg-gray-800 rounded-sm shadow-md flex-auto">
+          <% @cards.where(column_id: 1).each do |card| %>
+            <%= link_to column_card_path(card.column, card), class: "block" do %>
+            <div class="border border-gray-300 p-2.5 m-1.25 bg-gray-800 rounded-lg shadow-md flex-auto">
               
               <h3><%= card.title %></h3>
               <p><%= card.description %></p>
@@ -86,7 +89,7 @@
       
         
         
-        <div class="w-80 h-32 border border-gray-300 m-1.5 flex justify-center text-white rounded-lg relative" style="background-color: <%= column.color_code %> ;">
+        <div class="w-80 h-auto border border-gray-300 m-1.5 flex flex-col justify-center text-white rounded-lg relative" style="background-color: <%= column.color_code %> ;">
             
           <!--- bas -->
              <div class="absolute top-1 right-1">
@@ -94,9 +97,15 @@
     <!-- Dropdown Menu -->
     <div id="dropdownMenu-<%= column.id %>" class="hidden absolute right-0 top-full mt-2 bg-gray-700 text-white rounded-lg shadow-lg w-48">
       <ul>
-        <li><a href="#" class="block px-1 py-0.5 hover:bg-gray-700">Option 1</a></li>
+        <li><ul class="flex space-x-2 mt-3">
+  <li><button data-color="#9E2B3A" class="w-6 h-6 rounded-full bg-[#9E2B3A]"></button></li>
+  <li><button data-color="#088331" class="w-6 h-6 rounded-full bg-[#088331]"></button></li>
+  <li><button data-color="#3799BD" class="w-6 h-6 rounded-full bg-[#3799BD]"></button></li>
+  <li><button data-color="#D0A945" class="w-6 h-6 rounded-full bg-[#D0A945]"></button></li>
+  <li><button data-color="#A66DB8" class="w-6 h-6 rounded-full bg-[#A66DB8]"></button></li>
+</ul></li>
         <li><%= link_to 'Add card', '#', id: 'openModalButton', class: 'block px-4 py-2 hover:bg-gray-700 w-full text-left', data: { column_id: column.id, toggle: 'modal' } %>
-</li>
+          </li>
         <%= form_with url: column_path(column), method: :delete, local: true do %>
                 <button type="submit" class="block px-4 py-2 hover:bg-gray-700 w-full text-left">Put in the trash</button>
               <% end %>
@@ -106,13 +115,29 @@
 
 
             <!----bit-->
-          <div class="flex flex-col">
+          <div class="flex flex-col flex-grow overflow-y-auto p-2">
           <h4 class="text-white font-bold mb-1 mt-2.5 flex justify-center">
             <%= link_to column_path(column), class: "text-white" do %>
             <%= column.title %> 
             <% end %> 
             (<%= @column_card_counts[column.id] %>) </h4>
-            <div class="w-[180px] h-[80px] border-dashed border-gray-900 border-2 flex rounded-lg" >
+            <div class="w-full border-dashed  flex flex-col rounded-lg" >
+              <!----buraya yazılacak---->
+               <% column.cards.each do |card| %> <!-- Kolonun cardlarını döngü ile listeleme -->
+               <%= link_to column_card_path(card.column, card), class: "block" do %>
+            <div class="p-3 bg-gray-800 rounded-lg mb-4">
+
+              <h5 class="text-sm font-bold"><%= card.title %></h5>
+
+              <p><%= card.description %></p>
+              <!----------------->
+              <p class="text-xs text-gray-500 mt-1">
+                By <%= card.user.name %> <%= card.user.lastname[0].capitalize %>. <%= time_ago_in_words(card.created_at) %> ago
+              </p>
+            </div>
+          <% end %>
+          <% end %>
+
 
             </div>
           
@@ -129,7 +154,7 @@
   <div class="flex flex-col bg-slate-800 p-6 rounded-lg shadow-lg relative modal-content text-stone-50 text-xl">
     <p class="text-lg font-bold">Add a new column</p>
     <br>
-         <%= render 'columns/form' %>
+       <%= turbo_frame_tag "add-new-card", src: new_column_path %>
   </div>
 </div>
   

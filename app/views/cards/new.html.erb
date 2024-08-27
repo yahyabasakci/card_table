@@ -1,17 +1,5 @@
-<h1>New Card</h1>
-
-<%= form_with model: [@user, @card], local: true do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<%= turbo_frame_tag turbo_frame_request_id do %>
+  <%= render "form" %>
 <% end %>
+
+

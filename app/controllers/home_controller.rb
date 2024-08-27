@@ -9,7 +9,8 @@ class HomeController < ApplicationController
 
      @cards=Card.all
      @columns=Column.all
-     @column=Column.new
+     @column=Column.first
+     
      ############
      @card=Card.new
      @user=current_user

@@ -9,15 +9,22 @@ class CardsController < ApplicationController
     
     @card = Card.find(params[:id])
     @columns = Column.all
+    @column = @card.column
   end
   def new 
     @card = Card.new
+    @column = Column.find(params[:column_id])
+    if @card.save
+      redirect_to home_path, notice: 'Card was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def create
     @card = Card.new(card_params)
     @card.user = current_user
-    @card.column_id = 1  
+    @card.column_id = params[:column_id]
     if @card.save
       redirect_to home_path, notice: 'Card was successfully created.'
     else
@@ -40,7 +47,7 @@ class CardsController < ApplicationController
   def destroy
     @card = Card.find(params[:id])
     @card.destroy
-    redirect_to root_path, status: :see_other
+    redirect_to home_path, status: :see_other
   end
 
   private

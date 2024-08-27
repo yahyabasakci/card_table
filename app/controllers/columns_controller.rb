@@ -36,6 +36,24 @@ class ColumnsController < ApplicationController
   end
 
 
+  def update
+    @column = Column.find(params[:id])
+    if @column.update(column_params)
+      respond_to do |format|
+        format.html { redirect_to home_path } # İsteğe bağlı olarak redirect edebilirsiniz
+        format.turbo_stream
+      end
+    else
+      render :edit
+    end
+  end
+
+
+
+
+  
+
+
   def destroy
     @column = Column.find(params[:id])
     @column.destroy
@@ -46,15 +64,10 @@ class ColumnsController < ApplicationController
 
   private
 
-  # def column_params
-  #   params.require(:column).permit(:name)
-  # end
+
   def column_params
     params.require(:column).permit(:title, :description, :color_code)
   end
 
-  # def set_column
-  #   @column = column.find(params[:id])
-  # end
-  
+
 end
